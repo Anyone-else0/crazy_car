@@ -45,19 +45,19 @@ core/system_stm32f1xx.c \
 core/sysmem.c \
 core/syscalls.c \
 core/tim.c \
-hal_driver/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c \
-hal_driver/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c \
-hal_driver/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c \
-hal_driver/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c \
-hal_driver/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.c \
-hal_driver/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c \
-hal_driver/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c \
-hal_driver/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c \
-hal_driver/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c \
-hal_driver/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c \
-hal_driver/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c \
-hal_driver/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c \
-hal_driver/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c
+/home/peace/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.6/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c \
+/home/peace/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.6/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c \
+/home/peace/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.6/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c \
+/home/peace/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.6/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c \
+/home/peace/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.6/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.c \
+/home/peace/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.6/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c \
+/home/peace/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.6/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c \
+/home/peace/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.6/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c \
+/home/peace/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.6/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c \
+/home/peace/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.6/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c \
+/home/peace/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.6/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c \
+/home/peace/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.6/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c \
+/home/peace/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.6/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c
 
 # ASM sources
 ASM_SOURCES =  \
@@ -118,10 +118,10 @@ AS_INCLUDES =
 # C includes
 C_INCLUDES =  \
 -Icore \
--Ihal_driver/STM32F1xx_HAL_Driver/Inc \
--Ihal_driver/STM32F1xx_HAL_Driver/Inc/Legacy \
--Ihal_driver/CMSIS/Device/ST/STM32F1xx/Include \
--Ihal_driver/CMSIS/Include
+-I/home/peace/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.6/Drivers/STM32F1xx_HAL_Driver/Inc \
+-I/home/peace/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.6/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy \
+-I/home/peace/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.6/Drivers/CMSIS/Device/ST/STM32F1xx/Include \
+-I/home/peace/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.6/Drivers/CMSIS/Include
 
 
 # compile gcc flags
