@@ -4,7 +4,8 @@
 #include "stm32f1xx_hal.h"
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 void MX_GPIO_Init(void);
@@ -13,4 +14,3 @@ void MX_GPIO_Init(void);
 }
 #endif
 #endif /*__ GPIO_H__ */
-

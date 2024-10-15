@@ -5,20 +5,18 @@
 
 void delayUs(unsigned int us)
 {
-  unsigned int count = us * 72 / 5;
-  while (count--) {
-    __NOP();
-  }
+    unsigned int count = us * 72 / 5;
+    while (count--) {
+        __NOP();
+    }
 }
 
 void delayMs(unsigned int ms)
 {
-  while (ms--) {
-    delayUs(1000);
-  }
+    while (ms--) {
+        delayUs(1000);
+    }
 }
-
-/* USER CODE END 0 */
 
 /**
   * @brief  The application entry point.
@@ -26,44 +24,47 @@ void delayMs(unsigned int ms)
   */
 int main(void)
 {
-  HAL_Init();
+    HAL_Init();
 
-  SystemClock_Config();
+    SystemClock_Config();
 
-  MX_GPIO_Init();
-  MX_TIM1_Init();
-  MX_TIM2_Init();
+    MX_GPIO_Init();
+    MX_TIM1_Init();
+    MX_TIM2_Init();
 
-  HAL_TIM_PWM_Start (&htim1, TIM_CHANNEL_1);
-  HAL_TIM_PWM_Start (&htim2, TIM_CHANNEL_1);
-  HAL_TIM_PWM_Start (&htim2, TIM_CHANNEL_2);
+    HAL_TIM_PWM_Start (&htim1, TIM_CHANNEL_1);
+    HAL_TIM_PWM_Start (&htim2, TIM_CHANNEL_1);
+    HAL_TIM_PWM_Start (&htim2, TIM_CHANNEL_2);
 
-  while (1)
-  {
-    unsigned int delay = 200;
-    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
-    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_SET);
-    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_RESET);
-    __HAL_TIM_SetCompare(&htim1 , TIM_CHANNEL_1 , 1000-1);
-    delayMs(delay);
-    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_RESET);
-    __HAL_TIM_SetCompare(&htim1 , TIM_CHANNEL_1 , 1500-1);
-    delayMs(delay);
-    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
-    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_SET);
-    __HAL_TIM_SetCompare(&htim1 , TIM_CHANNEL_1 , 2000-1);
-    delayMs(delay);
-    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_RESET);
-    __HAL_TIM_SetCompare(&htim1 , TIM_CHANNEL_1 , 1500-1);
-    delayMs(delay);
-  }
+    __HAL_TIM_SetCompare(&htim2 , TIM_CHANNEL_1 , 10000-1);
+    __HAL_TIM_SetCompare(&htim2 , TIM_CHANNEL_2 , 10000-1);
+
+    while (1)
+    {
+        unsigned int delay = 500;
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_RESET);
+        //__HAL_TIM_SetCompare(&htim1 , TIM_CHANNEL_1 , 1000-1);
+        delayMs(delay);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_RESET);
+        //__HAL_TIM_SetCompare(&htim1 , TIM_CHANNEL_1 , 1500-1);
+        delayMs(delay);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_SET);
+        //__HAL_TIM_SetCompare(&htim1 , TIM_CHANNEL_1 , 2000-1);
+        delayMs(delay);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_RESET);
+        //__HAL_TIM_SetCompare(&htim1 , TIM_CHANNEL_1 , 1500-1);
+        delayMs(delay);
+    }
 }
