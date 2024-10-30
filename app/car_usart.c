@@ -1,6 +1,6 @@
 #include "car_usart.h"
 #include "sys_handle.h"
-#include <stdlib.h>
+#include "car_util.h"
 
 #define CAR_USART UART5
 #define CAR_USART_IRQN UART5_IRQn
@@ -17,7 +17,7 @@ void CAR_USART_IRQ_HANDLER(void)
     HAL_UART_IRQHandler(&gUsartHdl);
 }
 
-void carUartMspInit(UART_HandleTypeDef *pUsartHdl)
+static void carUartMspInit(UART_HandleTypeDef *pUsartHdl)
 {
     GPIO_InitTypeDef gpioInit = {0};
     __HAL_RCC_UART5_CLK_ENABLE();
@@ -37,23 +37,28 @@ void carUartMspInit(UART_HandleTypeDef *pUsartHdl)
 
     HAL_NVIC_SetPriority(CAR_USART_IRQN, 0, 0);
     HAL_NVIC_EnableIRQ(CAR_USART_IRQN);
+    CAR_UNREFERRENCED(pUsartHdl);
 }
 
-void carUartMspDeInit(UART_HandleTypeDef *pUsartHdl)
+static void carUartMspDeInit(UART_HandleTypeDef *pUsartHdl)
 {
     __HAL_RCC_UART5_CLK_DISABLE();
     HAL_GPIO_DeInit(CAR_USART_TX_GPIO, CAR_USART_TX_GPIO_PIN);
     HAL_GPIO_DeInit(CAR_USART_RX_GPIO, CAR_USART_RX_GPIO_PIN);
     HAL_NVIC_DisableIRQ(CAR_USART_IRQN);
+    CAR_UNREFERRENCED(pUsartHdl);
 }
 
-void carUartCpltCb(UART_HandleTypeDef *pUsartHdl)
+static void carUartCpltCb(UART_HandleTypeDef *pUsartHdl)
 {
+    CAR_UNREFERRENCED(pUsartHdl);
     return;
 }
 
-void carUartRxEventCb(UART_HandleTypeDef *pUsartHdl, uint16_t Size)
+static void carUartRxEventCb(UART_HandleTypeDef *pUsartHdl, uint16_t Size)
 {
+    CAR_UNREFERRENCED(pUsartHdl);
+    CAR_UNREFERRENCED(Size);
     return;
 }
 
@@ -67,42 +72,19 @@ void carUsartInit(UART_HandleTypeDef *pUsartHdl)
     pUsartHdl->Init.HwFlowCtl = UART_HWCONTROL_NONE;
     pUsartHdl->Init.Mode = UART_MODE_TX_RX;
     if (HAL_UART_RegisterCallback(pUsartHdl, HAL_UART_MSPINIT_CB_ID, carUartMspInit) != HAL_OK) {
-        Error_Handler();
+        carErrorCanNotHadle();
     }
     if (HAL_UART_RegisterCallback(pUsartHdl, HAL_UART_MSPDEINIT_CB_ID, carUartMspDeInit) != HAL_OK) {
-        Error_Handler();
+        carErrorCanNotHadle();
     }
     if (HAL_UART_Init(pUsartHdl) != HAL_OK) {
-        Error_Handler();
+        carErrorCanNotHadle();
     }
     if (HAL_UART_RegisterCallback(pUsartHdl, HAL_UART_RX_COMPLETE_CB_ID, carUartCpltCb) != HAL_OK) {
-        Error_Handler();
+        carErrorCanNotHadle();
     }
     if (HAL_UART_RegisterRxEventCallback(pUsartHdl, carUartRxEventCb) != HAL_OK) {
-        Error_Handler();
+        carErrorCanNotHadle();
     }
     // HAL_UARTEx_ReceiveToIdle_IT(pUsartHdl, (uint8_t *)g_rx_buffer, RXBUFFERSIZE);
-}
-
-CarUart_t *carUsartCreate(void)
-{
-    CarUart_t *pUsart = (CarUart_t *)malloc(sizeof(*pUsart));
-    if (pUsart == NULL) {
-        // error handle
-    }
-    pUsart->pUartHdl = &gUsartHdl;
-
-    carListNodeInit(&pUsart->rxDoneQ);
-    carListNodeInit(&pUsart->rxIdleQ);
-
-    if (pUsart->pUartHdl->Instance != CAR_USART) {
-        carUsartInit(pUsart->pUartHdl);
-    }
-    // HAL_UARTEx_ReceiveToIdle_IT(&pUsart->pUartHdl, (uint8_t *)g_rx_buffer, RXBUFFERSIZE);
-    return pUsart;
-}
-
-void carUsartDestroy(CarUart_t *pUsart)
-{
-    return;
 }

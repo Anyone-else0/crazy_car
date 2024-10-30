@@ -36,17 +36,17 @@ BUILD_DIR = build
 ######################################
 # C sources
 C_SOURCES =  \
-app/main.c \
+app/car_util.c \
+app/car_main.c \
+app/car_engine_hw.c \
+app/car_engine.c \
+app/car_usart.c \
 core/sys_handle.c \
 core/stm32f1xx_it.c \
 core/stm32f1xx_hal_msp.c \
 core/system_stm32f1xx.c \
 core/sysmem.c \
 core/syscalls.c \
-core/car_gpio.c \
-core/car_tim.c \
-core/car_usart.c \
-lib/car_log.c \
 ../STM32Cube_FW_F1_V1.8.6/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c \
 ../STM32Cube_FW_F1_V1.8.6/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c \
 ../STM32Cube_FW_F1_V1.8.6/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c \
@@ -125,13 +125,14 @@ C_INCLUDES =  \
 -I../STM32Cube_FW_F1_V1.8.6/Drivers/CMSIS/Device/ST/STM32F1xx/Include \
 -I../STM32Cube_FW_F1_V1.8.6/Drivers/CMSIS/Include \
 -Icore \
--Ilib
+-Ilib \
+-Iapp
 
 
 # compile gcc flags
-ASFLAGS = $(MCU) $(AS_DEFS) $(AS_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
+ASFLAGS = $(MCU) $(AS_DEFS) $(AS_INCLUDES) $(OPT) -Wall -Wextra -Werror -fdata-sections -ffunction-sections
 
-CFLAGS += $(MCU) $(C_DEFS) $(C_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
+CFLAGS += $(MCU) $(C_DEFS) $(C_INCLUDES) $(OPT) -Wall -Wextra -Werror -fdata-sections -ffunction-sections
 
 ifeq ($(DEBUG), 1)
 CFLAGS += -g -gdwarf-2
