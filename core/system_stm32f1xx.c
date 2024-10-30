@@ -1,77 +1,4 @@
-/**
- ******************************************************************************
- * @file    system_stm32f1xx.c
- * @author  MCD Application Team
- * @brief   CMSIS Cortex-M3 Device Peripheral Access Layer System Source File.
- *
- * 1.  This file provides two functions and one global variable to be called from
- *     user application:
- *      - SystemInit(): Setups the system clock (System clock source, PLL Multiplier
- *                      factors, AHB/APBx prescalers and Flash settings).
- *                      This function is called at startup just after reset and
- *                      before branch to main program. This call is made inside
- *                      the "startup_stm32f1xx_xx.s" file.
- *
- *      - SystemCoreClock variable: Contains the core clock (HCLK), it can be used
- *                                  by the user application to setup the SysTick
- *                                  timer or configure other parameters.
- *
- *      - SystemCoreClockUpdate(): Updates the variable SystemCoreClock and must
- *                                 be called whenever the core clock is changed
- *                                 during program execution.
- *
- * 2. After each device reset the HSI (8 MHz) is used as system clock source.
- *    Then SystemInit() function is called, in "startup_stm32f1xx_xx.s" file, to
- *    configure the system clock before to branch to main program.
- *
- * 4. The default value of HSE crystal is set to 8 MHz (or 25 MHz, depending on
- *    the product used), refer to "HSE_VALUE".
- *    When HSE is used as system clock source, directly or through PLL, and you
- *    are using different crystal you have to adapt the HSE value to your own
- *    configuration.
- *
- ******************************************************************************
- * @attention
- *
- * Copyright (c) 2017-2021 STMicroelectronics.
- * All rights reserved.
- *
- * This software is licensed under terms that can be found in the LICENSE file
- * in the root directory of this software component.
- * If no LICENSE file comes with this software, it is provided AS-IS.
- *
- ******************************************************************************
- */
-
-/** @addtogroup CMSIS
- * @{
- */
-
-/** @addtogroup stm32f1xx_system
- * @{
- */
-
-/** @addtogroup STM32F1xx_System_Private_Includes
- * @{
- */
-
 #include "stm32f1xx.h"
-
-/**
- * @}
- */
-
-/** @addtogroup STM32F1xx_System_Private_TypesDefinitions
- * @{
- */
-
-/**
- * @}
- */
-
-/** @addtogroup STM32F1xx_System_Private_Defines
- * @{
- */
 
 #if !defined(HSE_VALUE)
 #define HSE_VALUE 8000000U /*!< Default value of the External oscillator in Hz. \
@@ -236,8 +163,7 @@ void SystemCoreClockUpdate(void)
     /* Get SYSCLK source -------------------------------------------------------*/
     tmp = RCC->CFGR & RCC_CFGR_SWS;
 
-    switch (tmp)
-    {
+    switch (tmp) {
     case 0x00U: /* HSI used as system clock */
         SystemCoreClock = HSI_VALUE;
         break;
@@ -253,25 +179,19 @@ void SystemCoreClockUpdate(void)
 #if !defined(STM32F105xC) && !defined(STM32F107xC)
         pllmull = (pllmull >> 18U) + 2U;
 
-        if (pllsource == 0x00U)
-        {
+        if (pllsource == 0x00U) {
             /* HSI oscillator clock divided by 2 selected as PLL clock entry */
             SystemCoreClock = (HSI_VALUE >> 1U) * pllmull;
-        }
-        else
-        {
+        } else {
 #if defined(STM32F100xB) || defined(STM32F100xE)
             prediv1factor = (RCC->CFGR2 & RCC_CFGR2_PREDIV1) + 1U;
             /* HSE oscillator clock selected as PREDIV1 clock entry */
             SystemCoreClock = (HSE_VALUE / prediv1factor) * pllmull;
 #else
             /* HSE selected as PLL clock entry */
-            if ((RCC->CFGR & RCC_CFGR_PLLXTPRE) != (uint32_t)RESET)
-            { /* HSE oscillator clock divided by 2 */
+            if ((RCC->CFGR & RCC_CFGR_PLLXTPRE) != (uint32_t)RESET) { /* HSE oscillator clock divided by 2 */
                 SystemCoreClock = (HSE_VALUE >> 1U) * pllmull;
-            }
-            else
-            {
+            } else {
                 SystemCoreClock = HSE_VALUE * pllmull;
             }
 #endif
@@ -279,34 +199,25 @@ void SystemCoreClockUpdate(void)
 #else
         pllmull = pllmull >> 18U;
 
-        if (pllmull != 0x0DU)
-        {
+        if (pllmull != 0x0DU) {
             pllmull += 2U;
-        }
-        else
-        { /* PLL multiplication factor = PLL input clock * 6.5 */
+        } else { /* PLL multiplication factor = PLL input clock * 6.5 */
             pllmull = 13U / 2U;
         }
 
-        if (pllsource == 0x00U)
-        {
+        if (pllsource == 0x00U) {
             /* HSI oscillator clock divided by 2 selected as PLL clock entry */
             SystemCoreClock = (HSI_VALUE >> 1U) * pllmull;
-        }
-        else
-        { /* PREDIV1 selected as PLL clock entry */
+        } else { /* PREDIV1 selected as PLL clock entry */
 
             /* Get PREDIV1 clock source and division factor */
             prediv1source = RCC->CFGR2 & RCC_CFGR2_PREDIV1SRC;
             prediv1factor = (RCC->CFGR2 & RCC_CFGR2_PREDIV1) + 1U;
 
-            if (prediv1source == 0U)
-            {
+            if (prediv1source == 0U) {
                 /* HSE oscillator clock selected as PREDIV1 clock entry */
                 SystemCoreClock = (HSE_VALUE / prediv1factor) * pllmull;
-            }
-            else
-            { /* PLL2 clock selected as PREDIV1 clock entry */
+            } else { /* PLL2 clock selected as PREDIV1 clock entry */
 
                 /* Get PREDIV2 division factor and PLL2 multiplication factor */
                 prediv2factor = ((RCC->CFGR2 & RCC_CFGR2_PREDIV2) >> 4U) + 1U;
