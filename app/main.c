@@ -41,7 +41,6 @@ int main(void)
         delayMs(500);
         CAR_LOG_INFO("Hello there, mainPulse: %lu.", mainPulse);
         mainPulse++;
-        continue;
         unsigned int delay = 500;
         HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
         HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
