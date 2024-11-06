@@ -19,7 +19,9 @@ void carLogPrint(CarLogLevel_t lvl, const char *pFunc, const char *pFmt, ...)
     int useLen = 0;
     char *pLvl = NULL;
 
-    if (lvl == CAR_LOG_LVL_INFO) {
+    if (lvl == CAR_LOG_LVL_DEBUG) {
+        pLvl = "D";
+    } else if (lvl == CAR_LOG_LVL_INFO) {
         pLvl = "I";
     } else if (lvl == CAR_LOG_LVL_WARN) {
         pLvl = "W";
@@ -68,6 +70,7 @@ void carSysInit()
 
 void carDelayMs(uint32_t timeMs)
 {
+    CAR_LOG_DEBUG("Car delay %lu ms.", timeMs);
     HAL_Delay(timeMs);
     return;
 }

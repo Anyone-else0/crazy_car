@@ -19,7 +19,7 @@ int main(void)
         mainPulse++;
         //carDelayMs(1000);
         //continue;
-        unsigned int delay = 800;
+        uint32_t delay = 800;
         pEngine->pfForward(pEngine);
         pEngine->pfAngleSet(pEngine, 1000-1);
         carDelayMs(delay);

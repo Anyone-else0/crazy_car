@@ -17,6 +17,7 @@ static void carEngineSpeedSet(CarEngine_t *pEngine, uint16_t speed)
     CarEngineHw_t *pHw = pEngine->pPrvt->pHw;
     pHw->pfDrivePulseSet(pHw, CAR_DRIVE_LOC_LEFT, speed);
     pHw->pfDrivePulseSet(pHw, CAR_DRIVE_LOC_RIGHT, speed);
+    CAR_LOG_DEBUG("Engine speed: %u.", speed);
     return;
 }
 
@@ -24,6 +25,7 @@ static void carEngineAngleSet(CarEngine_t *pEngine, int16_t angle)
 {
     CarEngineHw_t *pHw = pEngine->pPrvt->pHw;
     pHw->pfOrientPulseSet(pHw, angle);
+    CAR_LOG_DEBUG("Engine angle: %u", angle);
     return;
 }
 
@@ -31,6 +33,7 @@ static void carEngineFormard(CarEngine_t *pEngine)
 {
     CarEngineHw_t *pHw = pEngine->pPrvt->pHw;
     pHw->pfDriveForward(pHw);
+    CAR_LOG_DEBUG("Engine forward.");
     return;
 }
 
@@ -38,6 +41,7 @@ static void carEngineBack(CarEngine_t *pEngine)
 {
     CarEngineHw_t *pHw = pEngine->pPrvt->pHw;
     pHw->pfDriveBack(pHw);
+    CAR_LOG_DEBUG("Engine back.");
     return;
 }
 
@@ -56,12 +60,20 @@ l_end:
     return rc;
 }
 
+static void carEngineIdle(CarEngine_t *pEngine)
+{
+    CarEngineHw_t *pHw = pEngine->pPrvt->pHw;
+    pHw->pfDriveIdle(pHw);
+    CAR_LOG_DEBUG("Engine Idle.");
+}
+
 static CarEngine_t sgCarEngine = {
     .pfInit = carEngineInit,
     .pfSpeedSet = carEngineSpeedSet,
     .pfAngleSet = carEngineAngleSet,
     .pfForward = carEngineFormard,
     .pfBack = carEngineBack,
+    .pfIdel = carEngineIdle,
     .pPrvt = &sgPrvt,
 };
 
