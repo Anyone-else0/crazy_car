@@ -37,6 +37,7 @@ BUILD_DIR = build
 # C sources
 C_SOURCES =  \
 app/car_util.c \
+schedule/car_co.c \
 app/car_main.c \
 app/car_engine_hw.c \
 app/car_engine.c \
@@ -126,6 +127,7 @@ C_INCLUDES =  \
 -I../STM32Cube_FW_F1_V1.8.6/Drivers/CMSIS/Include \
 -Icore \
 -Ilib \
+-Ischedule \
 -Iapp
 
 
