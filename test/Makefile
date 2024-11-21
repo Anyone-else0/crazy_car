@@ -5,6 +5,7 @@ CFLAGS+=-g
 CFLAGS+=-Wall
 CFLAGS+=-Werror
 CFLAGS+=-Wextra
+CFLAGS+=-DCAR_UT
 
 SRCDIR=.
 OBJDIR = obj
