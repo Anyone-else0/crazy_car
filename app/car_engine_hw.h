@@ -11,6 +11,7 @@ typedef enum CarEngineDriveLoc
 
 typedef struct CarEngineHw
 {
+    struct CarEngineHwPrvt *pPrvt;
     uint32_t orientZeroPulse;
     uint32_t orientFullPulse;
     uint32_t orientLeasePulse;
@@ -23,7 +24,6 @@ typedef struct CarEngineHw
     void (*pfDriveForward)(struct CarEngineHw *pHw);
     void (*pfDriveBack)(struct CarEngineHw *pHw);
     void (*pfDriveIdle)(struct CarEngineHw *pHw);
-    struct CarEngineHwPrvt *pPrvt;
 } CarEngineHw_t;
 
 CarEngineHw_t *carEngineHwGet(void);

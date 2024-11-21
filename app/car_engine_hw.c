@@ -338,6 +338,7 @@ static void carEngineHwDriveIdle(CarEngineHw_t *pHw)
 }
 
 static CarEngineHw_t sgCarEngineHw = {
+    .pPrvt = &sgPrvt,
     .pfInit = carEngineHwInit,
     .pfPwmStart = carEngineHwPwmStart,
     .pfOrientPulseSet = carEngineHwOrentPulseSet,
@@ -345,7 +346,6 @@ static CarEngineHw_t sgCarEngineHw = {
     .pfDriveForward = carEngineHwDriveForward,
     .pfDriveBack = carEngineHwDriveBack,
     .pfDriveIdle = carEngineHwDriveIdle,
-    .pPrvt = &sgPrvt,
 };
 
 CarEngineHw_t *carEngineHwGet(void)

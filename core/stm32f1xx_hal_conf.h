@@ -62,7 +62,7 @@ extern "C" {
 /*#define HAL_MMC_MODULE_ENABLED   */
 /*#define HAL_SDRAM_MODULE_ENABLED   */
 /*#define HAL_SMARTCARD_MODULE_ENABLED   */
-/*#define HAL_SPI_MODULE_ENABLED   */
+#define HAL_SPI_MODULE_ENABLED
 /*#define HAL_SRAM_MODULE_ENABLED   */
 #define HAL_TIM_MODULE_ENABLED
 #define HAL_UART_MODULE_ENABLED
@@ -151,7 +151,7 @@ extern "C" {
 #define USE_HAL_SMARTCARD_REGISTER_CALLBACKS 0U /* SMARTCARD register callback disabled */
 #define USE_HAL_IRDA_REGISTER_CALLBACKS 0U      /* IRDA register callback disabled      */
 #define USE_HAL_SRAM_REGISTER_CALLBACKS 0U      /* SRAM register callback disabled      */
-#define USE_HAL_SPI_REGISTER_CALLBACKS 0U       /* SPI register callback disabled       */
+#define USE_HAL_SPI_REGISTER_CALLBACKS 1U       /* SPI register callback disabled       */
 #define USE_HAL_TIM_REGISTER_CALLBACKS 1U       /* TIM register callback disabled       */
 #define USE_HAL_UART_REGISTER_CALLBACKS 1U      /* UART register callback disabled      */
 #define USE_HAL_USART_REGISTER_CALLBACKS 0U     /* USART register callback disabled     */

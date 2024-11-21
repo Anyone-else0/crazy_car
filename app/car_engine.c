@@ -68,13 +68,13 @@ static void carEngineIdle(CarEngine_t *pEngine)
 }
 
 static CarEngine_t sgCarEngine = {
+    .pPrvt = &sgPrvt,
     .pfInit = carEngineInit,
     .pfSpeedSet = carEngineSpeedSet,
     .pfAngleSet = carEngineAngleSet,
     .pfForward = carEngineFormard,
     .pfBack = carEngineBack,
     .pfIdel = carEngineIdle,
-    .pPrvt = &sgPrvt,
 };
 
 CarEngine_t *carEngineGet(void)
