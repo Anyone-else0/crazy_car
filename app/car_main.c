@@ -43,7 +43,7 @@ static void carHeartBeat(void *pCtx)
     CAR_LOG_INFO("Car heart beat: %lu", beat);
     beat++;
     CarCoSch_t *pSch = carCoSchGet();
-    pSch->pfCoPostDelay(pSch, carHeartBeat, NULL, 1000);
+    pSch->pfCoPostDelay(pSch, carHeartBeat, NULL, 500);
     CAR_UNREFERRENCED(pCtx);
     return;
 }
