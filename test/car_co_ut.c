@@ -21,6 +21,12 @@ static void carCoTest(void)
         }
         usleep(1000);
         UT_ASSERT(coTestCnt == 5);
+        for (int32_t idx = 0; idx < 1000; idx++) {
+            pSch->pfCoPost(pSch, coTest, &coTestCnt);
+            usleep(1000);
+        }
+        usleep(1000);
+        UT_ASSERT(coTestCnt == 1005);
     }
     {
         for (int32_t idx = 0; idx < 5; idx++) {
@@ -33,7 +39,7 @@ static void carCoTest(void)
             }
             printf("coTestCnt: %d.\n", coTestCnt);
             printf("Tick: %u.\n", HAL_GetTick());
-            UT_ASSERT(coTestCnt == 6 + idx);
+            UT_ASSERT(coTestCnt == 1006 + idx);
         }
     }
     carCoSchStubStop();
