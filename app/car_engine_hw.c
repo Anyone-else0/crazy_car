@@ -31,12 +31,12 @@ typedef struct CarEngineHwPrvt {
 static CarEngineHwPrvt_t sgPrvt = {
     .pOrientTmr = &sgCarEngineOrientTmr,
     .pDriveTmr = &sgCarEngineDriveTmr,
-    .driveL.pGpioHdl = GPIOA,
-    .driveL.in1Pin = GPIO_PIN_4,
-    .driveL.in2Pin = GPIO_PIN_5,
+    .driveL.pGpioHdl = GPIOC,
+    .driveL.in1Pin = GPIO_PIN_0,
+    .driveL.in2Pin = GPIO_PIN_1,
     .driveR.pGpioHdl = GPIOC,
-    .driveR.in1Pin = GPIO_PIN_4,
-    .driveR.in2Pin = GPIO_PIN_5,
+    .driveR.in1Pin = GPIO_PIN_2,
+    .driveR.in2Pin = GPIO_PIN_3,
 };
 
 static void carEngineOrientTmrMspInit(TIM_HandleTypeDef *pTmr)

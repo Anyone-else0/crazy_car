@@ -48,9 +48,7 @@ typedef struct CarCoSchPrvt
 static void carCoSchCriticalEnter(CarCoSch_t *pSch)
 {
 #ifndef CAR_UT
-    if (pSch->pPrvt->critical == 0) {
-        __disable_irq();
-    }
+    __disable_irq();
     pSch->pPrvt->critical++;
 #else
     pthread_mutex_lock(&pSch->pPrvt->mutex);
